@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartKey - Бесплатные инструменты для покупки недвижимости в Москве</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #faf7f5;
+            color: #2c1810;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Анимированный фон */
+        .animated-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(212, 165, 116, 0.15) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(1deg); }
+            66% { transform: translate(-20px, 20px) rotate(-1deg); }
+        }
+
+        /* Хедер */
+        .header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #2c1810;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #d4a574 0%, #8b4513 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #8b4513;
+        }
+
+        /* Герой секция */
+        .hero {
+            padding: 120px 20px 60px;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 165, 116, 0.1);
+            border: 2px solid #d4a574;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            font-weight: 600;
+            color: #8b4513;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #2c1810 0%, #8b4513 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #5c3d2e;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Статистика */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            animation: fadeInUp 1.2s ease 0.6s both;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #8b4513;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #5c3d2e;
+            font-size: 0.9rem;
+        }
+
+        /* Инструменты */
+        .tools-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2c1810;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #5c3d2e;
+            margin-bottom: 60px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d4a574 0%, #8b4513 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tool-icon {
+            height: 200px;
+            background: linear-gradient(135deg, #f5ede8 0%, #e8ccab 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .tool-content {
+            padding: 32px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            background: rgba(212, 165, 116, 0.1);
+            color: #8b4513;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            color: #2c1810;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .tool-description {
+            color: #5c3d2e;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .tool-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .tool-features li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            color: #5c3d2e;
+            font-size: 0.95rem;
+        }
+
+        .tool-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #8b4513;
+            font-weight: bold;
+        }
+
+        .tool-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b4513 0%, #d4a574 100%);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tool-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        /* О Марии */
+        .about-section {
+            background: linear-gradient(135deg, #2c1810 0%, #5c3d2e 100%);
+            color: white;
+            padding: 80px 20px;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '👩‍💼';
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 300px;
+            opacity: 0.05;
+        }
+
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #d4a574 0%, #8b4513 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            opacity: 0.95;
+        }
+
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .achievement {
+            text-align: center;
+        }
+
+        .achievement-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #d4a574;
+        }
+
+        .achievement-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* CTA секция */
+        .cta-section {
+            padding: 80px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            color: #2c1810;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            color: #5c3d2e;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #8b4513 0%, #d4a574 100%);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 24px rgba(139, 69, 19, 0.3);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(139, 69, 19, 0.4);
+        }
+
+        /* Футер */
+        .footer {
+            background: #2c1810;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .footer-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #d4a574;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact:hover {
+            color: white;
+        }
+
+        .footer-copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-image {
+                margin: 0 auto;
+            }
+
+            .achievements {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Загрузка */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #faf7f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f5ede8;
+            border-top-color: #8b4513;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="animated-bg"></div>
+
+    <!-- Загрузчик -->
+    <div class="loading" id="loader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Хедер -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">SK</div>
+                <div class="logo-text">SmartKey</div>
+            </a>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="hero-badge">БЕСПЛАТНЫЕ ИНСТРУМЕНТЫ</div>
+        <h1>Все, что нужно для покупки квартиры в Москве</h1>
+        <p class="hero-subtitle">
+            5 профессиональных инструментов от эксперта по недвижимости<br>
+            Мария Ефимова, SmartKey — 10 лет опыта, 500+ довольных клиентов
+        </p>
+    </section>
+
+    <!-- Статистика -->
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-value">500+</div>
+            <div class="stat-label">Счастливых семей</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">10 лет</div>
+            <div class="stat-label">На рынке Москвы</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">800К ₽</div>
+            <div class="stat-label">Средняя экономия</div>
+        </div>
+    </div>
+
+    <!-- Инструменты -->
+    <section class="tools-section">
+        <h2 class="section-title">Выберите нужный инструмент</h2>
+        <p class="section-subtitle">Каждый решает конкретную задачу при покупке недвижимости</p>
+
+        <div class="tools-grid">
+            <!-- Чек-лист -->
+            <div class="tool-card">
+                <div class="tool-icon">✅</div>
+                <div class="tool-content">
+                    <span class="tool-badge">САМЫЙ ПОПУЛЯРНЫЙ</span>
+                    <h3 class="tool-title">Мастер чек-лист проверки новостройки</h3>
+                    <p class="tool-description">
+                        50 критических пунктов, которые нужно проверить перед покупкой. 
+                        Интерактивный инструмент с подсказками от эксперта.
+                    </p>
+                    <ul class="tool-features">
+                        <li>Проверка документов застройщика</li>
+                        <li>Анализ локации и инфраструктуры</li>
+                        <li>Оценка планировки и качества</li>
+                    </ul>
+                    <a href="checklist.html" class="tool-link">Открыть чек-лист</a>
+                </div>
+            </div>
+
+            <!-- Калькулятор -->
+            <div class="tool-card">
+                <div class="tool-icon">💰</div>
+                <div class="tool-content">
+                    <span class="tool-badge">ЭКОНОМИЯ ДО 1 МЛН</span>
+                    <h3 class="tool-title">Калькулятор реальной стоимости</h3>
+                    <p class="tool-description">
+                        Рассчитайте все скрытые расходы при покупке квартиры. 
+                        Никаких сюрпризов после сделки!
+                    </p>
+                    <ul class="tool-features">
+                        <li>Все дополнительные платежи</li>
+                        <li>Расходы на оформление</li>
+                        <li>Советы по экономии</li>
+                    </ul>
+                    <a href="cost-calculator.html" class="tool-link">Рассчитать стоимость</a>
+                </div>
+            </div>
+
+            <!-- Ипотечный навигатор -->
+            <div class="tool-card">
+                <div class="tool-icon">🏦</div>
+                <div class="tool-content">
+                    <span class="tool-badge">ВСЕ ПРОГРАММЫ 2025</span>
+                    <h3 class="tool-title">Ипотечный навигатор</h3>
+                    <p class="tool-description">
+                        Полный гид по всем ипотечным программам. 
+                        Условия, ставки, требования банков.
+                    </p>
+                    <ul class="tool-features">
+                        <li>Льготные программы от 4%</li>
+                        <li>Калькулятор платежей</li>
+                        <li>Чек-лист документов</li>
+                    </ul>
+                    <a href="mortgage-navigator.html" class="tool-link">Выбрать ипотеку</a>
+                </div>
+            </div>
+
+            <!-- Аналитический отчет -->
+            <div class="tool-card">
+                <div class="tool-icon">📊</div>
+                <div class="tool-content">
+                    <span class="tool-badge">42 СТРАНИЦЫ АНАЛИТИКИ</span>
+                    <h3 class="tool-title">Рынок новостроек Москвы 2025</h3>
+                    <p class="tool-description">
+                        Эксклюзивный отчет с прогнозами цен, анализом районов 
+                        и рекомендациями экспертов.
+                    </p>
+                    <ul class="tool-features">
+                        <li>Динамика цен по районам</li>
+                        <li>Прогнозы на 2025-2026</li>
+                        <li>Топ-10 перспективных локаций</li>
+                    </ul>
+                    <a href="market-report.html" class="tool-link">Читать отчет</a>
+                </div>
+            </div>
+
+            <!-- Скрытые жемчужины -->
+            <div class="tool-card">
+                <div class="tool-icon">💎</div>
+                <div class="tool-content">
+                    <span class="tool-badge">СКИДКИ ДО 2 МЛН</span>
+                    <h3 class="tool-title">20 скрытых жемчужин</h3>
+                    <p class="tool-description">
+                        Квартиры со скидками, о которых не знает массовый покупатель. 
+                        Обновляется еженедельно!
+                    </p>
+                    <ul class="tool-features">
+                        <li>Закрытые предложения застройщиков</li>
+                        <li>Срочные продажи инвесторов</li>
+                        <li>Выгодные переуступки</li>
+                    </ul>
+                    <a href="hidden-gems.html" class="tool-link">Смотреть предложения</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- О Марии -->
+    <section class="about-section">
+        <div class="about-content">
+            <div class="about-image">👩‍💼</div>
+            <div class="about-text">
+                <h2>Мария Ефимова</h2>
+                <p>
+                    Ведущий эксперт по недвижимости агентства SmartKey. 
+                    Помогаю найти идеальную квартиру и сэкономить до 1 млн рублей.
+                </p>
+                <p>
+                    За 10 лет работы изучила все подводные камни рынка новостроек Москвы. 
+                    Мои клиенты получают не просто квартиру, а уверенность в правильном выборе.
+                </p>
+                <div class="achievements">
+                    <div class="achievement">
+                        <div class="achievement-value">500+</div>
+                        <div class="achievement-label">Сделок</div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-value">12</div>
+                        <div class="achievement-label">Банков-партнеров</div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-value">4.9</div>
+                        <div class="achievement-label">Рейтинг</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA секция -->
+    <section class="cta-section">
+        <h2 class="cta-title">Готовы найти квартиру мечты?</h2>
+        <p class="cta-text">
+            Используйте мои инструменты для самостоятельного поиска или 
+            обратитесь за персональной консультацией в Telegram
+        </p>
+        <div class="cta-buttons">
+            <a href="https://t.me/smart_key_msk" class="cta-primary">Написать в Telegram</a>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">SmartKey</div>
+            <div class="footer-contacts">
+                <a href="mailto:maria@smartkey.ru" class="footer-contact">
+                    <span>📧</span>
+                    <span>maria@smartkey.ru</span>
+                </a>
+                <a href="https://t.me/smart_key_msk" class="footer-contact">
+                    <span>💬</span>
+                    <span>@smart_key_msk</span>
+                </a>
+            </div>
+            <p class="footer-copyright">
+                © 2025 SmartKey. Все права защищены.<br>
+                Ваш надежный партнер в мире недвижимости Москвы.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Скрыть загрузчик
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hide');
+            }, 500);
+        });
+
+        // Анимация хедера при скролле
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            
+            if (window.pageYOffset > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Анимация элементов при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Анимируем карточки инструментов
+        document.querySelectorAll('.tool-card').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Счетчики статистики
+        function animateValue(element, start, end, duration) {
+            const range = end - start;
+            const startTime = performance.now();
+            
+            function updateValue(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(start + range * easeOutQuart);
+                
+                element.textContent = current + (element.textContent.includes('+') ? '+' : '');
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateValue);
+                }
+            }
+            
+            requestAnimationFrame(updateValue);
+        }
+
+        // Запускаем анимацию счетчиков при появлении в viewport
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.animated) {
+                    entry.target.animated = true;
+                    const value = parseInt(entry.target.textContent);
+                    animateValue(entry.target, 0, value, 2000);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-value').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+
+        // Параллакс эффект для фона
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.animated-bg');
+            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>
