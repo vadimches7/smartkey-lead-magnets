@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ипотечный навигатор 2025 | SmartKey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #faf7f5 0%, #f5ede8 100%);
+            color: #2c1810;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(145deg, #ffffff 0%, rgba(255,255,255,0.9) 100%);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(139, 69, 19, 0.08);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #d4a574 0%, #8b4513 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #8b4513;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #8b4513 0%, #d4a574 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #5c3d2e;
+            margin-bottom: 30px;
+        }
+
+        .expert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f5ddc7 0%, #e8ccab 100%);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #5c3d2e;
+        }
+
+        .navigation-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #8b4513;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #d4a574 0%, #8b4513 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 24px rgba(139, 69, 19, 0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(139, 69, 19, 0.12);
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d4a574 0%, #8b4513 100%);
+        }
+
+        .program-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .program-title {
+            font-size: 1.3rem;
+            color: #2c1810;
+            font-weight: 600;
+        }
+
+        .program-rate {
+            font-size: 1.8rem;
+            color: #8b4513;
+            font-weight: bold;
+        }
+
+        .program-details {
+            display: grid;
+            gap: 12px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5ede8;
+        }
+
+        .detail-label {
+            color: #5c3d2e;
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #2c1810;
+        }
+
+        .banks-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f5ede8;
+        }
+
+        .banks-title {
+            font-size: 1rem;
+            color: #5c3d2e;
+            margin-bottom: 12px;
+        }
+
+        .banks-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .bank-badge {
+            background: #f5ede8;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #5c3d2e;
+        }
+
+        .calculator-widget {
+            background: linear-gradient(145deg, #ffffff 0%, rgba(255,255,255,0.9) 100%);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 40px rgba(139, 69, 19, 0.08);
+            margin: 40px 0;
+        }
+
+        .calculator-title {
+            font-size: 1.5rem;
+            color: #8b4513;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .calc-input-group {
+            margin-bottom: 20px;
+        }
+
+        .calc-label {
+            display: block;
+            color: #5c3d2e;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .calc-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e8ccab;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .calc-input:focus {
+            outline: none;
+            border-color: #d4a574;
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+        }
+
+        .calc-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e8ccab;
+            outline: none;
+            -webkit-appearance: none;
+            margin: 12px 0;
+        }
+
+        .calc-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #8b4513;
+            cursor: pointer;
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, #f5ddc7 0%, #e8ccab 100%);
+            padding: 24px;
+            border-radius: 16px;
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .result-label {
+            color: #5c3d2e;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            color: #8b4513;
+            font-weight: bold;
+        }
+
+        .tips-section {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            margin: 40px 0;
+            box-shadow: 0 4px 24px rgba(139, 69, 19, 0.06);
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #faf7f5 0%, #f5ede8 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border-left: 4px solid #d4a574;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: #8b4513;
+            margin-bottom: 8px;
+        }
+
+        .documents-checklist {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            margin: 40px 0;
+            box-shadow: 0 4px 24px rgba(139, 69, 19, 0.06);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #faf7f5;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            background: #f5ede8;
+            transform: translateX(4px);
+        }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            background: #8b4513;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .expert-note {
+            background: linear-gradient(135deg, #fff8f3 0%, #ffeedd 100%);
+            border: 2px solid #d4a574;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 32px 0;
+            position: relative;
+        }
+
+        .expert-note::before {
+            content: '💡';
+            position: absolute;
+            top: -16px;
+            left: 24px;
+            background: white;
+            padding: 0 8px;
+            font-size: 1.5rem;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: #8b4513;
+            margin-bottom: 8px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #8b4513 0%, #d4a574 100%);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #8b4513;
+            padding: 16px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #5c3d2e;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">SK</div>
+                <span style="font-weight: 600; color: #8b4513;">SmartKey</span>
+            </div>
+            <h1>Ипотечный навигатор 2025</h1>
+            <p class="subtitle">Ваш персональный гид по всем ипотечным программам Москвы</p>
+            <div class="expert-badge">
+                <span>👩‍💼</span>
+                <span>Мария Ефимова, эксперт SmartKey</span>
+            </div>
+        </header>
+
+        <section class="navigation-section">
+            <div class="section-title">
+                <div class="section-icon">🏦</div>
+                <h2>Актуальные ипотечные программы</h2>
+            </div>
+
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3 class="program-title">Семейная ипотека</h3>
+                        <div class="program-rate">от 5%</div>
+                    </div>
+                    <div class="program-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Первый взнос</span>
+                            <span class="detail-value">от 15%</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Срок кредита</span>
+                            <span class="detail-value">до 30 лет</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Макс. сумма</span>
+                            <span class="detail-value">12 млн ₽</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Условия</span>
+                            <span class="detail-value">Дети до 18 лет</span>
+                        </div>
+                    </div>
+                    <div class="banks-section">
+                        <div class="banks-title">Банки с лучшими условиями:</div>
+                        <div class="banks-list">
+                            <span class="bank-badge">Сбер</span>
+                            <span class="bank-badge">ВТБ</span>
+                            <span class="bank-badge">Дом.РФ</span>
+                            <span class="bank-badge">Альфа</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3 class="program-title">IT-ипотека</h3>
+                        <div class="program-rate">от 4%</div>
+                    </div>
+                    <div class="program-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Первый взнос</span>
+                            <span class="detail-value">от 15%</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Срок кредита</span>
+                            <span class="detail-value">до 30 лет</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Макс. сумма</span>
+                            <span class="detail-value">18 млн ₽</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Условия</span>
+                            <span class="detail-value">IT-специалисты</span>
+                        </div>
+                    </div>
+                    <div class="banks-section">
+                        <div class="banks-title">Банки с лучшими условиями:</div>
+                        <div class="banks-list">
+                            <span class="bank-badge">Сбер</span>
+                            <span class="bank-badge">Тинькофф</span>
+                            <span class="bank-badge">ВТБ</span>
+                            <span class="bank-badge">Райффайзен</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3 class="program-title">Господдержка 2025</h3>
+                        <div class="program-rate">от 7%</div>
+                    </div>
+                    <div class="program-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Первый взнос</span>
+                            <span class="detail-value">от 15%</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Срок кредита</span>
+                            <span class="detail-value">до 30 лет</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Макс. сумма</span>
+                            <span class="detail-value">6 млн ₽</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Условия</span>
+                            <span class="detail-value">Новостройки</span>
+                        </div>
+                    </div>
+                    <div class="banks-section">
+                        <div class="banks-title">Банки с лучшими условиями:</div>
+                        <div class="banks-list">
+                            <span class="bank-badge">Дом.РФ</span>
+                            <span class="bank-badge">Сбер</span>
+                            <span class="bank-badge">ВТБ</span>
+                            <span class="bank-badge">Промсвязьбанк</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3 class="program-title">Стандартная ипотека</h3>
+                        <div class="program-rate">от 11%</div>
+                    </div>
+                    <div class="program-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Первый взнос</span>
+                            <span class="detail-value">от 10%</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Срок кредита</span>
+                            <span class="detail-value">до 30 лет</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Макс. сумма</span>
+                            <span class="detail-value">30 млн ₽</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Условия</span>
+                            <span class="detail-value">Без ограничений</span>
+                        </div>
+                    </div>
+                    <div class="banks-section">
+                        <div class="banks-title">Банки с лучшими условиями:</div>
+                        <div class="banks-list">
+                            <span class="bank-badge">Сбер</span>
+                            <span class="bank-badge">ВТБ</span>
+                            <span class="bank-badge">Газпромбанк</span>
+                            <span class="bank-badge">Открытие</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3 class="program-title">Сельская ипотека</h3>
+                        <div class="program-rate">от 2%</div>
+                    </div>
+                    <div class="program-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Первый взнос</span>
+                            <span class="detail-value">от 10%</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Срок кредита</span>
+                            <span class="detail-value">до 25 лет</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Макс. сумма</span>
+                            <span class="detail-value">6 млн ₽</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Условия</span>
+                            <span class="detail-value">Сельская местность</span>
+                        </div>
+                    </div>
+                    <div class="banks-section">
+                        <div class="banks-title">Банки с лучшими условиями:</div>
+                        <div class="banks-list">
+                            <span class="bank-badge">Россельхозбанк</span>
+                            <span class="bank-badge">Сбер</span>
+                            <span class="bank-badge">ВТБ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3 class="program-title">Военная ипотека</h3>
+                        <div class="program-rate">от 6%</div>
+                    </div>
+                    <div class="program-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Первый взнос</span>
+                            <span class="detail-value">от НИС</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Срок кредита</span>
+                            <span class="detail-value">до 25 лет</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Макс. сумма</span>
+                            <span class="detail-value">4.5 млн ₽</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Условия</span>
+                            <span class="detail-value">Военнослужащие</span>
+                        </div>
+                    </div>
+                    <div class="banks-section">
+                        <div class="banks-title">Банки с лучшими условиями:</div>
+                        <div class="banks-list">
+                            <span class="bank-badge">ВТБ</span>
+                            <span class="bank-badge">Сбер</span>
+                            <span class="bank-badge">Газпромбанк</span>
+                            <span class="bank-badge">Промсвязьбанк</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="calculator-widget">
+            <h3 class="calculator-title">Экспресс-калькулятор платежа</h3>
+            <div class="calc-input-group">
+                <label class="calc-label">Стоимость квартиры</label>
+                <input type="text" class="calc-input" id="propertyPrice" value="8 000 000 ₽">
+                <input type="range" class="calc-slider" id="priceSlider" min="3000000" max="30000000" value="8000000">
+            </div>
+            <div class="calc-input-group">
+                <label class="calc-label">Первый взнос</label>
+                <input type="text" class="calc-input" id="downPayment" value="1 600 000 ₽ (20%)">
+                <input type="range" class="calc-slider" id="downPaymentSlider" min="10" max="50" value="20">
+            </div>
+            <div class="calc-input-group">
+                <label class="calc-label">Срок кредита</label>
+                <input type="text" class="calc-input" id="loanTerm" value="20 лет">
+                <input type="range" class="calc-slider" id="termSlider" min="5" max="30" value="20">
+            </div>
+            <div class="calc-input-group">
+                <label class="calc-label">Процентная ставка</label>
+                <input type="text" class="calc-input" id="interestRate" value="7%">
+                <input type="range" class="calc-slider" id="rateSlider" min="4" max="15" value="7" step="0.1">
+            </div>
+            <div class="calc-result">
+                <div class="result-label">Ежемесячный платеж</div>
+                <div class="result-value" id="monthlyPayment">49 652 ₽</div>
+            </div>
+        </div>
+
+        <section class="tips-section">
+            <div class="section-title">
+                <div class="section-icon">💡</div>
+                <h2>Советы от Марии: как получить одобрение</h2>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-title">1. Подготовьте кредитную историю</div>
+                <p>За 3-6 месяцев до подачи заявки закройте все просрочки, погасите кредитные карты. Ваш показатель долговой нагрузки не должен превышать 50%.</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-title">2. Увеличьте официальный доход</div>
+                <p>Попросите работодателя оформить премии официально. Учитываются доходы за последние 6 месяцев. Дополнительный доход от сдачи квартиры тоже считается!</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-title">3. Выберите правильный банк</div>
+                <p>Зарплатные клиенты получают ставку на 0.5-1% ниже. Если вы IT-специалист или молодая семья - сначала проверьте льготные программы.</p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-title">4. Подайте заявки в 3-5 банков</div>
+                <p>Это не испортит кредитную историю, если сделать это в течение 14 дней. Сравните условия и выберите лучшее предложение.</p>
+            </div>
+        </section>
+
+        <div class="expert-note">
+            <div class="note-title">Секрет от эксперта</div>
+            <p>За 10 лет работы я вывела формулу идеального одобрения: первый взнос 25% + стаж на последнем месте от 6 месяцев + платеж не более 40% от дохода = одобрение в 95% случаев!</p>
+        </div>
+
+        <section class="documents-checklist">
+            <div class="section-title">
+                <div class="section-icon">📋</div>
+                <h2>Чек-лист документов для ипотеки</h2>
+            </div>
+
+            <div class="checklist-item">
+                <div class="check-icon">✓</div>
+                <span>Паспорт РФ (все страницы)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="check-icon">✓</div>
+                <span>СНИЛС</span>
+            </div>
+            <div class="checklist-item">
+                <div class="check-icon">✓</div>
+                <span>Справка о доходах (2-НДФЛ или по форме банка)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="check-icon">✓</div>
+                <span>Копия трудовой книжки, заверенная работодателем</span>
+            </div>
+            <div class="checklist-item">
+                <div class="check-icon">✓</div>
+                <span>Свидетельство о браке (если состоите в браке)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="check-icon">✓</div>
+                <span>Свидетельства о рождении детей (для семейной ипотеки)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="check-icon">✓</div>
+                <span>Военный билет (для мужчин до 27 лет)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="check-icon">✓</div>
+                <span>Документы по первоначальному взносу</span>
+            </div>
+            <div class="checklist-item">
+                <div class="check-icon">✓</div>
+                <span>Документы на имеющуюся недвижимость</span>
+            </div>
+        </section>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Нужна помощь с выбором ипотеки?</h2>
+            <p class="cta-text">Я помогу подобрать оптимальную программу и добиться одобрения в банке. Мои клиенты экономят до 800 000 ₽ на процентах!</p>
+            <a href="#" class="cta-button">Получить консультацию</a>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 SmartKey. Ваш надежный партнер в мире недвижимости</p>
+            <p style="margin-top: 8px; font-size: 0.9rem;">Мария Ефимова • +7 (495) XXX-XX-XX • @smart_key_msk</p>
+        </footer>
+    </div>
+
+    <script>
+        // Калькулятор
+        function formatNumber(num) {
+            return new Intl.NumberFormat('ru-RU').format(num);
+        }
+
+        function calculatePayment() {
+            const price = parseInt(document.getElementById('priceSlider').value);
+            const downPaymentPercent = parseInt(document.getElementById('downPaymentSlider').value);
+            const years = parseInt(document.getElementById('termSlider').value);
+            const rate = parseFloat(document.getElementById('rateSlider').value);
+
+            const downPayment = price * downPaymentPercent / 100;
+            const loanAmount = price - downPayment;
+            const monthlyRate = rate / 100 / 12;
+            const months = years * 12;
+
+            const payment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+
+            document.getElementById('propertyPrice').value = formatNumber(price) + ' ₽';
+            document.getElementById('downPayment').value = formatNumber(downPayment) + ' ₽ (' + downPaymentPercent + '%)';
+            document.getElementById('loanTerm').value = years + ' лет';
+            document.getElementById('interestRate').value = rate + '%';
+            document.getElementById('monthlyPayment').textContent = formatNumber(Math.round(payment)) + ' ₽';
+        }
+
+        // Слушатели событий
+        document.getElementById('priceSlider').addEventListener('input', calculatePayment);
+        document.getElementById('downPaymentSlider').addEventListener('input', calculatePayment);
+        document.getElementById('termSlider').addEventListener('input', calculatePayment);
+        document.getElementById('rateSlider').addEventListener('input', calculatePayment);
+
+        // Инициализация
+        calculatePayment();
+    </script>
+</body>
+</html>
